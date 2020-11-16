@@ -34,12 +34,13 @@ public class PrimeThreadBite extends Thread{
         while(myWork.moreWork()){
             synchronized(this) {
                 Range range = myWork.getWork();
-                System.err.println(currentThread().getName() + " getting a bites : "+range);
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                System.err.println(currentThread().getName() + " getting bites : "+range);
+                bCount++;
+//                try {
+//                    Thread.sleep(100);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
 
                 if (range == null)
                     break;
@@ -67,10 +68,11 @@ public class PrimeThreadBite extends Thread{
     public String getSTime(){
         return String.format("%7.5f",nTime/1000000000.0);
     }
+    public double getSTimeDouble(){
+        return nTime/1000000000.0;
+    }
 
     public void print() {
-        System.out.println("Thread " + getName()+" Prime Cont = "+getpCount());
-        System.out.println("# Seconds Used = "+ getSTime());
-        System.out.println();;
+        System.out.println("Thread-" + getName()+": PRIMECOUNT: "+getpCount()+" TIMER: "+getSTime()+" sec TOTAL BITES: "+bCount);
     }
 }
