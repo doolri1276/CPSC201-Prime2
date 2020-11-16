@@ -58,4 +58,10 @@ public class PrimeThreadBite extends Thread{
     public String getSTime(){
         return String.format("%7.5f",nTime/1000000000.0);
     }
+
+    public void print() {
+        System.out.println("Thread " + getName()+" Prime Cont = "+getpCount());
+        System.out.println("# Seconds Used = "+ getSTime());
+        System.out.println();;
+    }
 }
