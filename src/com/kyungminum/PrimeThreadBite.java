@@ -32,13 +32,22 @@ public class PrimeThreadBite extends Thread{
         long start = System.nanoTime();
 
         while(myWork.moreWork()){
-            System.out.println(currentThread().getName() + " getting a bite");
-            Range range = myWork.getWork();
-            if(range == null)
-                break;
-            for (int num = range.lo; num<= range.hi; num+=2){
-                if(isPrime(num)){
-                    pCount++;
+            synchronized(this) {
+                Range range = myWork.getWork();
+                System.err.println(currentThread().getName() + " getting a bites : "+range);
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if (range == null)
+                    break;
+                for (int num = range.lo; num <= range.hi; num += 2) {
+
+                    if (isPrime(num)) {
+                        pCount++;
+                    }
                 }
             }
         }

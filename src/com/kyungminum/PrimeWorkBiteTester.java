@@ -4,15 +4,16 @@ import javax.swing.plaf.SplitPaneUI;
 
 public class PrimeWorkBiteTester {
 
-    private static int threadNum;
+    private static int threadNum=4;
 
 
 
     public static void main(String[] args) {
-        PrimeWork work = new PrimeWork(3, 1000000, 500000);
+        PrimeWork work = new PrimeWork(3, 1000000, 5000);
         PrimeThreadBite[] threads= new PrimeThreadBite[threadNum];
         for(int i=0;i<threads.length;i++){
-            threads[i] = new PrimeThreadBite(work, "THREAD "+i+1);
+            threads[i] = new PrimeThreadBite(work, "THREAD "+(i+1));
+//            System.out.println("currentThread : "+Thread.currentThread().getName());
         }
 
         long start = System.nanoTime();
@@ -20,12 +21,15 @@ public class PrimeWorkBiteTester {
         for(PrimeThreadBite thread: threads)
             thread.start();
 
-
+//        System.out.println("currentThread : "+Thread.currentThread().getName());
         Thread.currentThread().yield();
+//        System.out.println("currentThread : "+Thread.currentThread().getName());
 
         try{
-            for(PrimeThreadBite thread: threads)
+            for(PrimeThreadBite thread: threads) {
                 thread.join();
+//                System.out.println("currentThread : "+Thread.currentThread().getName());
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

@@ -13,11 +13,13 @@ public class PrimeWork {
         lo=min;
         hi=max;
         current=lo;
+        complete = false;
         this.bite=bite;
 
     }
 
     public /*synchronized*/ Range getWork(){
+//        System.out.println("getwork 들어옴 : "+ lo);
         Range range;
         synchronized(this) {
             if (!complete) {
